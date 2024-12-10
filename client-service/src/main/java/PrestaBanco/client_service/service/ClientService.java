@@ -17,9 +17,6 @@ public class ClientService {
     @Autowired
     ClientRepository clientRepository;
 
-    @Autowired
-    RestTemplate restTemplate;
-
     public ClientEntity getClientById(Long id) {return clientRepository.findById(id).get();}
 
     public ClientEntity clientLogin(String email, String password) {
@@ -51,18 +48,6 @@ public class ClientService {
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
-    }
-
-    //For evaluation
-    public int getAge(Long id) {
-        String birthDateString = getClientById(id).getBirthdate();
-        if (birthDateString == null) {
-            return 0;
-        }
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate birthDate = LocalDate.parse(birthDateString, formatter);
-        LocalDate currentDate = LocalDate.now();
-        return Period.between(birthDate, currentDate).getYears();
     }
 
     public String hashPassword(String password) {

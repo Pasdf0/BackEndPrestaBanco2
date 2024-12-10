@@ -2,6 +2,7 @@ package PrestaBanco.loan_service.service;
 
 import PrestaBanco.loan_service.entity.LoanEntity;
 import PrestaBanco.loan_service.model.Document;
+import PrestaBanco.loan_service.model.TotalCost;
 import PrestaBanco.loan_service.repository.LoanRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,26 @@ public class LoanService {
                 url,
                 requestEntity,
                 Integer.class
+        );
+
+        return response.getBody();
+    }
+
+    //FollowUp
+    public TotalCost getTotalCost(LoanEntity loan) {
+        // Create headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        // Create request entity
+        HttpEntity<LoanEntity> requestEntity = new HttpEntity<>(loan, headers);
+
+        // Send POST request
+        String url = "http://follow-up-service/follow-up/";
+        ResponseEntity<TotalCost> response = restTemplate.postForEntity(
+                url,
+                requestEntity,
+                TotalCost.class
         );
 
         return response.getBody();

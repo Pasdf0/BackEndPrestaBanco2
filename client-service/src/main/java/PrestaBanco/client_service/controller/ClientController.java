@@ -52,9 +52,4 @@ public class ClientController {
     public ResponseEntity<Boolean> deleteClient(@PathVariable Long id) throws Exception {
         return ResponseEntity.ok(clientService.deleteClient(id));
     }
-
-    @GetMapping("/getAge/{id}")
-    public ResponseEntity<Integer> getAge(@PathVariable Long id) {
-        return ResponseEntity.ok(clientService.getAge(id));
-    }
 }

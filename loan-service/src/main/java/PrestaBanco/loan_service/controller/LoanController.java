@@ -2,6 +2,7 @@ package PrestaBanco.loan_service.controller;
 
 import PrestaBanco.loan_service.entity.LoanEntity;
 import PrestaBanco.loan_service.model.Document;
+import PrestaBanco.loan_service.model.TotalCost;
 import PrestaBanco.loan_service.service.LoanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -70,6 +71,13 @@ public class LoanController {
     public ResponseEntity<Integer> simulateCredit(@RequestBody LoanEntity loan) {
         int result = loanService.simulateCredit(loan);
         return ResponseEntity.ok(result);
+    }
+
+    //FollowUp
+    @GetMapping("/follow-up")
+    public ResponseEntity<TotalCost> getTotalCost(@RequestBody LoanEntity loan) {
+        TotalCost totalCost = loanService.getTotalCost(loan);
+        return ResponseEntity.ok(totalCost);
     }
 
     //Evaluation
