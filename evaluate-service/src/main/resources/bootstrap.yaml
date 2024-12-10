@@ -5,10 +5,10 @@ spring:
     config:
       enabled: true
       uri: http://localhost:8081
-    datasource:
-      url: jdbc:postgresql://localhost:5432/dbprestabanco-evaluate
-      username: postgres
-      password: 1234
-    jpa:
-      hibernate:
-        ddl-auto: update
+  datasource:
+    url: jdbc:postgresql://localhost:5432/dbprestabanco-evaluate
+    username: postgres
+    password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: update

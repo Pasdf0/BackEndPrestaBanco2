@@ -12,7 +12,7 @@
         <module name="gateway-service" />
         <module name="client-service" />
       </profile>
-      <profile name="Annotation profile for evaluate-service" enabled="true">
+      <profile name="Annotation profile for loan-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />

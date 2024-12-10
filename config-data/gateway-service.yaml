@@ -7,8 +7,8 @@ eureka:
     register-with-eureka: true
     service-url:
       default-zone: http://localhost:8761/eureka
-    instance:
-      hostname: localhost
+  instance:
+    hostname: localhost
 
 spring:
   cloud:
@@ -29,8 +29,8 @@ spring:
           uri: lb://simulate-service
           predicates:
             - Path=/simulate/**
-        - id: evaluation-service
-          uri: lb://evaluation-service
+        - id: evaluate-service
+          uri: lb://evaluate-service
           predicates:
             - Path=/evaluation/**
         - id: follow-up-service
