@@ -10,6 +10,6 @@ import java.util.ArrayList;
 
 @Repository
 public interface DocumentRepository extends JpaRepository<DocumentEntity, Long> {
-    @Query("SELECT e FROM DocumentEntity e WHERE e.loanRequestId = :loanRequestId")
-    ArrayList<DocumentEntity> findByLoanRequest(@Param("loanRequestId") Long loanRequestId);
+    @Query("SELECT e FROM DocumentEntity e WHERE e.loanId = :loanId")
+    ArrayList<DocumentEntity> findByLoan(@Param("loanId") Long loanId);
 }

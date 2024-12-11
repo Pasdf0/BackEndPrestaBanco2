@@ -3,13 +3,15 @@ package PrestaBanco.document_service.controller;
 import PrestaBanco.document_service.entity.DocumentEntity;
 import PrestaBanco.document_service.service.DocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
-@CrossOrigin("*")
 @RequestMapping("/document")
 public class DocumentController {
     @Autowired
@@ -17,16 +19,20 @@ public class DocumentController {
 
     @GetMapping("/{id}")
     public ResponseEntity<List<DocumentEntity>> getDocumentsByLoanId(@PathVariable Long id) {
-        List<DocumentEntity> documents = documentService.getDocumentByLoanRequest(id);
+        List<DocumentEntity> documents = documentService.getDocumentByLoan(id);
         return ResponseEntity.ok(documents);
     }
 
-    @PostMapping("/")
-    public ResponseEntity<?> uploadMultipleFiles (@RequestBody List<DocumentEntity> documents) {
-        for (DocumentEntity doc : documents) {
-            documentService.saveDocument(doc);
+    @PostMapping("/{id}")
+    public ResponseEntity<?> uploadMultipleFiles (
+        @PathVariable Long id,
+        @RequestParam("documents") MultipartFile[] files) {
+        try {
+            documentService.saveDocuments(id, files);
+            return ResponseEntity.ok().build();
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error uploading documents");
         }
-        return ResponseEntity.ok("Documentos guardados exitosamente");
     }
 
     @PutMapping("/")

@@ -5,6 +5,15 @@ public class Document {
     private byte[] document;
     private Long loanId;
 
+    public Document() {
+    }
+
+    public Document(Long loanId, byte[] document, Long id) {
+        this.loanId = loanId;
+        this.document = document;
+        this.id = id;
+    }
+
     public Long getId() {
         return id;
     }

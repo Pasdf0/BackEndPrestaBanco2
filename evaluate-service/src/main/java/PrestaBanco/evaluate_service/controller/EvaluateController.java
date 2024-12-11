@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/evaluate")
-@CrossOrigin("*")
 public class EvaluateController {
     @Autowired
     EvaluateService evaluateService;

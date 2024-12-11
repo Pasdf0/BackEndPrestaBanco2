@@ -23,7 +23,7 @@ services:
   config-service:
     build: ./config-service
     ports:
-      - "8888:8888" # Spring Cloud Config default port
+      - "8081:8081" # Spring Cloud Config default port
     depends_on:
       - eureka-service
     networks:
@@ -32,8 +32,6 @@ services:
   # Client Service
   client-service:
     build: ./client-service
-    ports:
-      - "8081:8081"
     depends_on:
       - eureka-service
       - config-service
@@ -43,8 +41,6 @@ services:
   # Evaluate Service
   evaluate-service:
     build: ./evaluate-service
-    ports:
-      - "8082:8082"
     depends_on:
       - eureka-service
       - config-service
@@ -55,7 +51,7 @@ services:
   simulate-service:
     build: ./simulate-service
     ports:
-      - "8083:8083"
+      - "8080:8080"
     depends_on:
       - eureka-service
       - config-service
@@ -65,8 +61,6 @@ services:
   # Follow-Up Service
   follow-up-service:
     build: ./follow-up-service
-    ports:
-      - "8084:8084"
     depends_on:
       - eureka-service
       - config-service
@@ -76,8 +70,6 @@ services:
   # Loan Service
   loan-service:
     build: ./loan-service
-    ports:
-      - "8085:8085"
     depends_on:
       - eureka-service
       - config-service
@@ -87,8 +79,6 @@ services:
   # Document Service
   document-service:
     build: ./document-service
-    ports:
-      - "8086:8086"
     depends_on:
       - eureka-service
       - config-service

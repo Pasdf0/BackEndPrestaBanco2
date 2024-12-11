@@ -10,6 +10,20 @@ public class Client {
     private String password;
     private String type; //Client - Executive
 
+    public Client() {
+    }
+
+    public Client(Long id, String rut, String name, String lastName, String email, String birthdate, String password, String type) {
+        this.id = id;
+        this.rut = rut;
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.birthdate = birthdate;
+        this.password = password;
+        this.type = type;
+    }
+
     public Long getId() {
         return id;
     }

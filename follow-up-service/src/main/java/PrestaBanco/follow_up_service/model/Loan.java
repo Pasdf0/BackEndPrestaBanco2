@@ -13,6 +13,23 @@ public class Loan {
     private String executiveMessage;
     private String state;
 
+    public Loan() {
+    }
+
+    public Loan(Long id, int propertyCost, int loanAmount, int loanTerm, double interestRate, String type, Long clientId, Long execId, Boolean cancelled, String executiveMessage, String state) {
+        this.id = id;
+        this.propertyCost = propertyCost;
+        this.loanAmount = loanAmount;
+        this.loanTerm = loanTerm;
+        this.interestRate = interestRate;
+        this.type = type;
+        this.clientId = clientId;
+        this.execId = execId;
+        this.cancelled = cancelled;
+        this.executiveMessage = executiveMessage;
+        this.state = state;
+    }
+
     public Long getId() {
         return id;
     }

@@ -8,6 +8,18 @@ public class TotalCost {
     private int totalFee;
     private int totalCost;
 
+    public TotalCost() {
+    }
+
+    public TotalCost(double monthlyInterest, double desgravamen, int incendio, int adminFee, int totalFee, int totalCost) {
+        this.monthlyInterest = monthlyInterest;
+        this.desgravamen = desgravamen;
+        this.incendio = incendio;
+        this.adminFee = adminFee;
+        this.totalFee = totalFee;
+        this.totalCost = totalCost;
+    }
+
     public double getMonthlyInterest() {
         return monthlyInterest;
     }

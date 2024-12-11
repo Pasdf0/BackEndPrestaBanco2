@@ -1,21 +1,16 @@
 package PrestaBanco.loan_service.controller;
 
 import PrestaBanco.loan_service.entity.LoanEntity;
-import PrestaBanco.loan_service.model.Document;
 import PrestaBanco.loan_service.model.TotalCost;
 import PrestaBanco.loan_service.service.LoanService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.List;
 
 @RestController
 @RequestMapping("/loan")
-@CrossOrigin("*")
 public class LoanController {
     @Autowired
     LoanService loanService;
@@ -69,14 +64,20 @@ public class LoanController {
     //Simulate
     @PostMapping("/simulate")
     public ResponseEntity<Integer> simulateCredit(@RequestBody LoanEntity loan) {
-        int result = loanService.simulateCredit(loan);
+        int loanAmount = loan.getLoanAmount();
+        int loanTerm = loan.getLoanTerm();
+        double interestRate = loan.getInterestRate();
+        int result = loanService.simulateCredit(loanAmount, loanTerm, interestRate);
         return ResponseEntity.ok(result);
     }
 
     //FollowUp
-    @GetMapping("/follow-up")
+    @PostMapping("/follow-up")
     public ResponseEntity<TotalCost> getTotalCost(@RequestBody LoanEntity loan) {
-        TotalCost totalCost = loanService.getTotalCost(loan);
+        int loanAmount = loan.getLoanAmount();
+        int loanTerm = loan.getLoanTerm();
+        double interestRate = loan.getInterestRate();
+        TotalCost totalCost = loanService.getTotalCost(loanAmount, loanTerm, interestRate);
         return ResponseEntity.ok(totalCost);
     }
 
@@ -88,24 +89,5 @@ public class LoanController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(age);
-    }
-
-    //Document
-    @GetMapping("/getDocuments/{id}")
-    public ResponseEntity<List<Document>> getDocuments(@PathVariable Long id) {
-        List<Document> documents = loanService.getDocuments(id);
-        return ResponseEntity.ok(documents);
-    }
-
-    @PostMapping("/saveDocuments/{id}")
-    public ResponseEntity<String> uploadMultipleFiles (
-            @PathVariable Long id,
-            @RequestParam("documents") MultipartFile[] files) {
-
-        try {
-            return ResponseEntity.ok(loanService.saveDocuments(id, files));
-        } catch (IOException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error uploading documents");
-        }
     }
 }

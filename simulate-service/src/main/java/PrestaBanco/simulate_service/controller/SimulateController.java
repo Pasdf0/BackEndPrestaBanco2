@@ -8,14 +8,17 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/simulate")
-@CrossOrigin("*")
 public class SimulateController {
     @Autowired
     SimulateService simulateService;
 
     @GetMapping("/")
-    public ResponseEntity<Integer> simulateCredit(@RequestBody Loan loan) {
-        Integer fee = simulateService.simulateCredit(loan.getLoanAmount(), loan.getInterestRate(), loan.getLoanTerm());
+    public ResponseEntity<Integer> simulateCredit(
+            @RequestParam int loanAmount,
+            @RequestParam int loanTerm,
+            @RequestParam double interestRate
+    ) {
+        Integer fee = simulateService.simulateCredit(loanAmount, interestRate, loanTerm);
         return ResponseEntity.ok(fee);
     }
 }
