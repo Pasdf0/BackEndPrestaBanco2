@@ -3,10 +3,11 @@ kind: ConfigMap
 metadata:
   name: db-config
 data:
-  DB_NAME_CLIENT: 'db-prestabanco-client'
-  DB_NAME_LOAN: 'db-prestabanco-loan'
-  DB_NAME_DOCUMENT: 'db-prestabanco-document'
-  DB_NAME_SIMULATE: 'db-prestabanco-simulate'
-  DB_NAME_EVALUATE: 'db-prestabanco-evaluate'
-  DB_NAME_FOLLOW_UP: 'db-prestabanco-follow-up'
-  DB_URL: 'jdbc:postgresql://localhost:5432/'
+  DB_NAME_CLIENT: 'dbprestabanco-client'
+  DB_NAME_LOAN: 'dbprestabanco-loan'
+  DB_NAME_DOCUMENT: 'dbprestabanco-document'
+  DB_NAME_SIMULATE: 'dbprestabanco-simulate'
+  DB_NAME_EVALUATE: 'dbprestabanco-evaluate'
+  DB_NAME_FOLLOW_UP: 'dbprestabanco-follow-up'
+  DB_URL: 'postgres-db-service:5432'
+  DB_URI: 'http://config-service:8081'

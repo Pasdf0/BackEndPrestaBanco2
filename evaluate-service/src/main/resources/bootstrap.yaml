@@ -4,9 +4,9 @@ spring:
   cloud:
     config:
       enabled: true
-      uri: http://localhost:8081
+      uri: ${DB_URI}
   datasource:
-    url: ${DB_URL}${DB_NAME_EVALUATE}
+    url: jdbc:postgresql://${DB_URL}/${DB_NAME_EVALUATE}
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
   jpa:
