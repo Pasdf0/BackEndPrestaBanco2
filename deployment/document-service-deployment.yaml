@@ -18,7 +18,7 @@ spec:
         - name: document-service
           image: pasdf/document-service:latest
           ports:
-            - containerPort: 8084
+            - containerPort: 8080
           env:
             - name: DB_USERNAME
               valueFrom:
@@ -30,18 +30,3 @@ spec:
                 secretKeyRef:
                   name: db-secret
                   key: db-password
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: document-service
-  labels:
-    app: document-service
-spec:
-  selector:
-    app: document-service
-  ports:
-    - protocol: TCP
-      port: 8084
-      targetPort: 8084
-  type: LoadBalancer

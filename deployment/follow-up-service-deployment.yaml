@@ -18,7 +18,7 @@ spec:
         - name: follow-up-service
           image: pasdf/follow-up-service:latest
           ports:
-            - containerPort: 8086
+            - containerPort: 8080
           env:
             - name: DB_USERNAME
               valueFrom:
@@ -30,18 +30,3 @@ spec:
                 secretKeyRef:
                   name: db-secret
                   key: db-password
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: follow-up-service
-  labels:
-    app: follow-up-service
-spec:
-  selector:
-    app: follow-up-service
-  ports:
-    - protocol: TCP
-      port: 8086
-      targetPort: 8086
-  type: LoadBalancer

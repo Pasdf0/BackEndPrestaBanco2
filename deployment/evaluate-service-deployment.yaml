@@ -18,7 +18,7 @@ spec:
         - name: evaluate-service
           image: pasdf/evaluate-service:latest
           ports:
-            - containerPort: 8087
+            - containerPort: 8080
           env:
             - name: DB_USERNAME
               valueFrom:
@@ -30,18 +30,3 @@ spec:
                 secretKeyRef:
                   name: db-secret
                   key: db-password
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: evaluate-service
-  labels:
-    app: evaluate-service
-spec:
-  selector:
-    app: evaluate-service
-  ports:
-    - protocol: TCP
-      port: 8087
-      targetPort: 8087
-  type: LoadBalancer

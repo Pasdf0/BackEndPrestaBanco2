@@ -18,7 +18,7 @@ spec:
         - name: client-service
           image: pasdf/client-service:latest
           ports:
-            - containerPort: 8082
+            - containerPort: 8080
           env:
             - name: DB_USERNAME
               valueFrom:
@@ -30,18 +30,3 @@ spec:
                 secretKeyRef:
                   name: db-secret
                   key: db-password
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: client-service
-  labels:
-    app: client-service
-spec:
-  selector:
-    app: client-service
-  ports:
-    - protocol: TCP
-      port: 8082
-      targetPort: 8082
-  type: LoadBalancer

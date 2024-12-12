@@ -18,7 +18,7 @@ spec:
         - name: loan-service
           image: pasdf/loan-service:latest
           ports:
-            - containerPort: 8083
+            - containerPort: 8080
           env:
             - name: DB_USERNAME
               valueFrom:
@@ -30,18 +30,3 @@ spec:
                 secretKeyRef:
                   name: db-secret
                   key: db-password
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: loan-service
-  labels:
-    app: loan-service
-spec:
-  selector:
-    app: loan-service
-  ports:
-    - protocol: TCP
-      port: 8083
-      targetPort: 8083
-  type: LoadBalancer

@@ -4,4 +4,4 @@ spring:
   cloud:
     config:
       enabled: true
-      uri: ${DB_URI}
+      uri: http://localhost:8081

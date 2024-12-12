@@ -4,7 +4,7 @@ spring:
   cloud:
     config:
       enabled: true
-      uri: ${DB_URI}
+      uri: http://localhost:8081
   datasource:
     url: jdbc:postgresql://${DB_URL}/${DB_NAME_CLIENT}
     username: ${DB_USERNAME}

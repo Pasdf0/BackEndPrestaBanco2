@@ -18,7 +18,7 @@ spec:
         - name: simulate-service
           image: pasdf/simulate-service:latest
           ports:
-            - containerPort: 8085
+            - containerPort: 8080
           env:
             - name: DB_USERNAME
               valueFrom:
@@ -30,18 +30,3 @@ spec:
                 secretKeyRef:
                   name: db-secret
                   key: db-password
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: simulate-service
-  labels:
-    app: simulate-service
-spec:
-  selector:
-    app: simulate-service
-  ports:
-    - protocol: TCP
-      port: 8085
-      targetPort: 8085
-  type: LoadBalancer

@@ -35,10 +35,15 @@ spec:
           volumeMounts:
             - name: init-sql
               mountPath: /docker-entrypoint-initdb.d
+            - name: postgres-persistent-storage
+              mountPath: /var/lib/postgresql/data
       volumes:
         - name: init-sql
           configMap:
             name: init-sql-config
+        - name: postgres-persistent-storage
+          persistentVolumeClaim:
+            claimName: postgres-pv-claim
 ---
 apiVersion: v1
 kind: Service
@@ -52,3 +57,30 @@ spec:
       targetPort: 5432
   selector:
     app: postgres-db
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pv-claim
+  labels:
+    app: postgres-db
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: postgres
+spec:
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 2Gi
+  hostPath:
+    path: /data/postgres
+  storageClassName: standard

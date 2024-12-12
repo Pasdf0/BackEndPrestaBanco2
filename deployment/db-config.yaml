@@ -10,4 +10,3 @@ data:
   DB_NAME_EVALUATE: 'dbprestabanco-evaluate'
   DB_NAME_FOLLOW_UP: 'dbprestabanco-follow-up'
   DB_URL: 'postgres-db-service:5432'
-  DB_URI: 'http://config-service:8081'
