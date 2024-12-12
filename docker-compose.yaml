@@ -1,0 +1,97 @@
+version: '3.8'
+
+services:
+  config-service:
+    build:
+      context: ./config-service
+      dockerfile: Dockerfile
+    image: pasdf/config-service:latest
+    ports:
+      - "8081:8081"
+
+  eureka-service:
+    build:
+      context: ./eureka-service
+      dockerfile: Dockerfile
+    image: pasdf/eureka-service:latest
+    ports:
+      - "8761:8761"
+    depends_on:
+      - config-service
+
+  gateway-service:
+    build:
+      context: ./gateway-service
+      dockerfile: Dockerfile
+    image: pasdf/gateway-service:latest
+    ports:
+      - "8080:8080"
+    depends_on:
+      - eureka-service
+
+  client-service:
+    build:
+      context: ./client-service
+      dockerfile: Dockerfile
+    image: pasdf/client-service:latest
+    ports:
+      - "8082:8082"
+    depends_on:
+      - eureka-service
+
+  loan-service:
+    build:
+      context: ./loan-service
+      dockerfile: Dockerfile
+    image: pasdf/loan-service:latest
+    ports:
+      - "8083:8083"
+    depends_on:
+      - eureka-service
+
+  document-service:
+    build:
+      context: ./document-service
+      dockerfile: Dockerfile
+    image: pasdf/document-service:latest
+    ports:
+      - "8084:8084"
+    depends_on:
+      - eureka-service
+
+  simulate-service:
+    build:
+      context: ./simulate-service
+      dockerfile: Dockerfile
+    image: pasdf/simulate-service:latest
+    ports:
+      - "8085:8085"
+    depends_on:
+      - eureka-service
+
+  follow-up-service:
+    build:
+      context: ./follow-up-service
+      dockerfile: Dockerfile
+    image: pasdf/follow-up-service:latest
+    ports:
+      - "8086:8086"
+    depends_on:
+      - eureka-service
+
+  evaluate-service:
+    build:
+      context: ./evaluate-service
+      dockerfile: Dockerfile
+    image: pasdf/evaluate-service:latest
+    ports:
+      - "8087:8087"
+    depends_on:
+      - eureka-service
+  frontend:
+    build:
+        context: ../FrontEndPrestaBanco
+        dockerfile: Dockerfile
+    image: pasdf/frontend:latest
+    ports:
+      - "80:80"

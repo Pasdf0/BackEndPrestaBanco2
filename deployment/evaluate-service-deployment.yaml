@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: evaluate-service-deployment
+  labels:
+    app: evaluate-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: evaluate-service
+  template:
+    metadata:
+      labels:
+        app: evaluate-service
+    spec:
+      containers:
+        - name: evaluate-service
+          image: pasdf/evaluate-service:latest
+          ports:
+            - containerPort: 8087
+          env:
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: db-username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: db-password
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: evaluate-service
+  labels:
+    app: evaluate-service
+spec:
+  selector:
+    app: evaluate-service
+  ports:
+    - protocol: TCP
+      port: 8087
+      targetPort: 8087
+  type: LoadBalancer

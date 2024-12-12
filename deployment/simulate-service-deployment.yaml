@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simulate-service-deployment
+  labels:
+    app: simulate-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: simulate-service
+  template:
+    metadata:
+      labels:
+        app: simulate-service
+    spec:
+      containers:
+        - name: simulate-service
+          image: pasdf/simulate-service:latest
+          ports:
+            - containerPort: 8085
+          env:
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: db-username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: db-password
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: simulate-service
+  labels:
+    app: simulate-service
+spec:
+  selector:
+    app: simulate-service
+  ports:
+    - protocol: TCP
+      port: 8085
+      targetPort: 8085
+  type: LoadBalancer

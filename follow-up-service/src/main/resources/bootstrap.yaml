@@ -7,8 +7,8 @@ spring:
       uri: http://localhost:8081
   datasource:
     url: jdbc:postgresql://localhost:5432/dbprestabanco-follow-up
-    username: postgres
-    password: 1234
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
   jpa:
     hibernate:
       ddl-auto: update
