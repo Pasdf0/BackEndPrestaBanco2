@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: init-sql-config
+data:
+  init.sql: |
+    CREATE DATABASE dbprestabanco-client;
+    CREATE DATABASE dbprestabanco-document;
+    CREATE DATABASE dbprestabanco-loan;
+    CREATE DATABASE dbprestabanco-evaluate;
+    CREATE DATABASE dbprestabanco-simulate;
+    CREATE DATABASE dbprestabanco-follow-up;
